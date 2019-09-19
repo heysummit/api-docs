@@ -1,15 +1,11 @@
 ---
-title: API Reference
+title: HeySummit API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='https://heysummit.com'>&copy; HeySummit.com</a>
 
 includes:
   - errors
@@ -19,221 +15,145 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the HeySummit API. If you're on our [Business plan](https://heysummit.com) then you're able to take advantage of our powerful API to pull data out (such as events, attendees, speakers) and also push data into your HeySummit event (such as registering attendees, importing external ticket sales and much more).
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+We have language examples in Shell (with other platform examples coming soon)! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
-> To authorize, use this code:
+HeySummit uses API Keys to allow access to the API. You can find your API Key on the [API Settings](https://heysummit.com/quick-launch/?path=/manage/event/api-settings/) page, when logged into your HeySummit account..
 
-```ruby
-require 'kittn'
+The API Key needs to be included in ALL API requests to the server in a header that looks like the following:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Please make sure you replace <code>e3c0c748fe9b55386eecc07c339ec4099a8b9b0e</code> with your own API Key!
 </aside>
 
-# Kittens
+# Events
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Get All Events
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "https://api.heysummit.com/api/events/"
+  -X GET
+  -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+    "count":1,
+    "next":null,
+    "previous":null,
+    "results":[{
+        "id":"1234",
+        "url":"https://api.heysummit.com/api/events/1234/",
+        "title":"Demo Event ABC",
+        "event_url":"https://event.example.com",
+        "first_talk_at":"2019-05-19T11:53:52",
+        "last_talk_at":"2019-05-31T12:44:00",
+        "is_live": true,
+        "is_archived": false,
+        "is_evergreen": false,
+        "is_open_for_registrations": true
+    },{
+        "id":"1234",
+        "url":"https://api.heysummit.com:8000/api/events/1234/",
+        "title":"Demo Event ABC",
+        "event_url":"https://event.example.com",
+        "first_talk_at":"2019-05-19T11:53:52",
+        "last_talk_at":"2019-05-31T12:44:00"
+        ...
+    }]
+}
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves all Events linked to your account.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://api.heysummit.com/api/events/`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+is_live | [No Default] | Set this to True to filter Events that are currently marked as Live
+is_archived | [No Default] | Set this to True to filter Events that are currently marked as Archived
+is_evergreen | [No Default] | Set this to True to filter Events that are setup as Evergreen events
+is_open_for_registrations | [No Default] | Set this to True to filter Events that are open for registrations
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+## Get an Event
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl "https://api.heysummit.com/api/events/1234/"
+  -X GET
+  -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "id":"1234",
+    "url":"https://api.heysummit.com/api/events/1234/",
+    "title":"Demo Event ABC",
+    "event_url":"https://event.example.com",
+    "first_talk_at":"2019-05-19T11:53:52",
+    "last_talk_at":"2019-05-31T12:44:00",
+    ...
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint retrieves an event.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://api.heysummit.com/api/events/<ID>/`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+ID | The ID of the Event to retrieve
 
-## Delete a Specific Kitten
+## Archive an Event
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+curl "https://api.heysummit.com/api/events/1234/archive/"
+  -X POST
+  -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "id":"1234",
+    "url":"https://api.heysummit.com/api/events/1234/",
+    "title":"Demo Event ABC",
+    "event_url":"https://event.example.com",
+    "first_talk_at":"2019-05-19T11:53:52",
+    "last_talk_at":"2019-05-31T12:44:00",
+    ...
 }
 ```
 
-This endpoint deletes a specific kitten.
+This endpoint archives an Event.
+
+<aside class="warning">Please note that archiving an Event will make it invisible to the public.</aside>
+
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`POST https://api.heysummit.com/api/events/<ID>/archive/`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to delete
-
+ID | The ID of the Event to archive

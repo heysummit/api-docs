@@ -74,8 +74,10 @@ html, body {
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    max-width: 100%;
+    max-width: 60%;
     margin-bottom: $logo-margin;
+    padding: 15px;
+    height: auto;
   }
 
   &>.search {
@@ -167,6 +169,14 @@ html, body {
     display: none;
     background-color: $nav-subitem-bg;
     font-weight: 500;
+  }
+  .toc-list-h2.active {
+      a.toc-link {
+          color: $nav-active-parent-child-text;
+      }
+      a.toc-link.active {
+          color: $nav-active-text;
+      }
   }
 
   .toc-h2 {
@@ -468,13 +478,16 @@ html, body {
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
     line-height: 1.6;
+    color: $aside-notice-text;
 
     &.warning {
       background-color: $aside-warning-bg;
+      color: $aside-warning-text;
     }
 
     &.success {
       background-color: $aside-success-bg;
+      color: $aside-success-text;
     }
   }
 
@@ -511,6 +524,9 @@ html, body {
 // This is all the stuff that appears in the right half of the page
 
 .content {
+  a {
+    color: $link-text;
+  }
   pre, blockquote {
     background-color: $code-bg;
     color: #fff;
