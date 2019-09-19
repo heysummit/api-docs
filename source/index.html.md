@@ -45,9 +45,9 @@ curl "https://api.heysummit.com/api/events/"
 
 ```json
 {
-    "count":1,
-    "next":null,
-    "previous":null,
+    "count": 17,
+    "next": "https://api.heysummit.com/api/events/?page=2",
+    "previous": null,
     "results":[{
         "id":"1234",
         "url":"https://api.heysummit.com/api/events/1234/",
