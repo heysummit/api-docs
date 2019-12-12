@@ -264,6 +264,17 @@
               </ul>
           </li>
           <li>
+            <a href="#tickets" class="toc-h1 toc-link" data-title="Tickets">Tickets</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-tickets" class="toc-h2 toc-link" data-title="Get All Tickets">Get All Tickets</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-ticket" class="toc-h2 toc-link" data-title="Get a Ticket">Get a Ticket</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -626,20 +637,106 @@ Please make sure you replace <code>e3c0c748fe9b55386eecc07c339ec4099a8b9b0e</cod
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>event</td>
+<td>Yes</td>
 <td>The ID of the Event you want to add this attendee to</td>
 </tr>
 <tr>
 <td>email</td>
+<td>Yes</td>
 <td>The email address of the Attendee you&#39;re adding</td>
 </tr>
 <tr>
 <td>name</td>
+<td>Yes</td>
 <td>The name of the Attendee you&#39;re adding</td>
+</tr>
+<tr>
+<td>ticket_id</td>
+<td>No</td>
+<td>The ID of the Ticket you want to add for this attendee</td>
+</tr>
+</tbody></table>
+<h1 id='tickets'>Tickets</h1><h2 id='get-all-tickets'>Get All Tickets</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.heysummit.com/api/tickets/"</span>
+  -X GET
+  -H <span class="s2">"Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.heysummit.com/api/tickets/30/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Premium Access"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-12-06T16:38:30.024291"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.heysummit.com/api/tickets/1/"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Free Access"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-28T15:45:23.699053"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all Tickets linked to your account.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.heysummit.com/api/tickets/</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event</td>
+<td>The ID of the event you want to filter the list of Tickets by</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-ticket'>Get a Ticket</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.heysummit.com/api/tickets/1/"</span>
+  -X GET
+  -H <span class="s2">"Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.heysummit.com/api/tickets/1/"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Free Access"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"event_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-10-28T15:45:23.699053"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a single Ticket.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.heysummit.com/api/tickets/&lt;ID&gt;/</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the Ticket to retrieve</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
