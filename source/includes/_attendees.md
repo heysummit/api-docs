@@ -120,8 +120,9 @@ This endpoint creates a new Attendee for the Event passed.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-event | The ID of the Event you want to add this attendee to
-email | The email address of the Attendee you're adding
-name | The name of the Attendee you're adding
+Parameter | Required | Description
+--------- | ----------- | -----------
+event | Yes | The ID of the Event you want to add this attendee to
+email | Yes | The email address of the Attendee you're adding
+name | Yes | The name of the Attendee you're adding
+ticket_id | No | The ID of the Ticket you want to add for this attendee

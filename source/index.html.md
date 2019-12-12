@@ -11,6 +11,7 @@ includes:
   - events
   - talks
   - attendees
+  - tickets
   - errors
 
 search: true
