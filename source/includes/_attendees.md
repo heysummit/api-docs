@@ -3,8 +3,8 @@
 ## Get All Attendees
 
 ```shell
-curl "https://api.heysummit.com/api/attendees/"
-  -X GET
+curl "https://api.heysummit.com/api/attendees/" \
+  -X GET \
   -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
@@ -16,21 +16,93 @@ curl "https://api.heysummit.com/api/attendees/"
     "next": "https://api.heysummit.com/api/attendees/?page=2",
     "previous": null,
     "results":[{
-        "id": 246,
+        "id": 245,
         "url": "https://api.heysummit.com/api/attendees/246/",
         "email": "joe@bloggs.com",
         "name": "Joe Bloggs",
+        "registration_status": "Completed Order",
         "event_id": 24,
         "event_name": "Demo Summit ABC",
         "created_at": "2019-04-18T19:51:24.073422"
+        "agreed_terms": "2020-06-15T23:14:52.970120",
+        "affiliate_email": "affilaite1@testdomain.com",
+        "speaker_referrer_email": null,
+        "utm_source": "News Weekly",
+        "utm_medium": "Article",
+        "utm_campaign": "EMAIL-CHAIN-29561",
+        "referer_ref": null,
+        "http_referer": "https://subd.myreferralsite.com/",
+        "http_referer_domain": "mydomain.com",
+        "ip_address": "8.8.8.8",
+        "categories": [
+            {
+                "id": 241,
+                "event": 6,
+                "title": "Motivation",
+                "description": null
+            }
+        ],
+        "talks": [
+            "https://api.heysummit.com/api/talks/155/",
+            "https://api.heysummit.com/api/talks/156/"
+        ],
+        "questions": [],
+        "tickets": [
+            {
+                "ticket_id": 10,
+                "ticket_name": "Free Access",
+                "amount_gross": null,
+                "amount_net": null,
+                "created_at": "2020-06-15T23:14:56.309526"
+            }
+        ]
     },{
         "id": 246,
         "url": "https://api.heysummit.com/api/attendees/246/",
         "email": "joe@bloggs.com",
         "name": "Joe Bloggs",
+        "registration_status": "Completed Order",
         "event_id": 24,
         "event_name": "Demo Summit ABC",
-        "created_at": "2019-04-18T19:51:24.073422"
+        "created_at": "2019-04-18T19:51:24.073422",
+        "agreed_terms": "2020-06-15T23:14:52.970120",
+        "affiliate_email": "affilaite1@testdomain.com",
+        "speaker_referrer_email": null,
+        "utm_source": "News Weekly",
+        "utm_medium": "Article",
+        "utm_campaign": "EMAIL-CHAIN-29561",
+        "referer_ref": null,
+        "http_referer": "https://subd.myreferralsite.com/",
+        "http_referer_domain": "mydomain.com",
+        "ip_address": "8.8.4.4",
+        "categories": [
+            {
+                "id": 240,
+                "event": 6,
+                "title": "Empowerment",
+                "description": null
+            },
+            {
+                "id": 241,
+                "event": 6,
+                "title": "Motivation",
+                "description": null
+            }
+        ],
+        "talks": [
+            "https://api.heysummit.com/api/talks/155/",
+            "https://api.heysummit.com/api/talks/156/"
+        ],
+        "questions": [],
+        "tickets": [
+            {
+                "ticket_id": 10,
+                "ticket_name": "Free Access",
+                "amount_gross": null,
+                "amount_net": null,
+                "created_at": "2020-06-15T23:14:56.309526"
+            }
+        ]
         ...
     }]
 }
@@ -51,8 +123,8 @@ event | The ID of the event you want to filter the list of Attendees by
 ## Get an Attendee
 
 ```shell
-curl "https://api.heysummit.com/api/attendees/1234/"
-  -X GET
+curl "https://api.heysummit.com/api/attendees/1234/" \
+  -X GET \
   -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
@@ -64,10 +136,42 @@ curl "https://api.heysummit.com/api/attendees/1234/"
     "url": "https://api.heysummit.com/api/attendees/246/",
     "email": "joe@bloggs.com",
     "name": "Joe Bloggs",
+    "registration_status": "Completed Order",
     "event_id": 24,
     "event_name": "Demo Summit ABC",
-    "created_at": "2019-04-18T19:51:24.073422"
-    ...
+    "created_at": "2019-04-18T19:51:24.073422",
+    "agreed_terms": "2020-06-15T23:14:52.970120",
+    "affiliate_email": "affilaite1@testdomain.com",
+    "speaker_referrer_email": null,
+    "utm_source": "News Weekly",
+    "utm_medium": "Article",
+    "utm_campaign": "EMAIL-CHAIN-29561",
+    "referer_ref": null,
+    "http_referer": "https://subd.myreferralsite.com/",
+    "http_referer_domain": "mydomain.com",
+    "ip_address": "8.8.8.8",
+    "categories": [
+        {
+            "id": 241,
+            "event": 6,
+            "title": "Motivation",
+            "description": null
+        }
+    ],
+    "talks": [
+        "https://api.heysummit.com/api/talks/155/",
+        "https://api.heysummit.com/api/talks/156/"
+    ],
+    "questions": [],
+    "tickets": [
+        {
+            "ticket_id": 10,
+            "ticket_name": "Free Access",
+            "amount_gross": null,
+            "amount_net": null,
+            "created_at": "2020-06-15T23:14:56.309526"
+        }
+    ],
 }
 ```
 
@@ -87,10 +191,10 @@ ID | The ID of the Attendee to retrieve
 
 
 ```shell
-curl "https://api.heysummit.com/api/attendees/"
-  -X POST
-  -d '{"event":1234, "email":"joe@bloggs.com", "name":"Joe Bloggs"}'
-  -H "Content-Type: application/json"
+curl "https://api.heysummit.com/api/attendees/" \
+  -X POST \
+  -d '{"event":1234, "email":"joe@bloggs.com", "name":"Joe Bloggs"}' \
+  -H "Content-Type: application/json" \
   -H "Authorization: Token e3c0c748fe9b55386eecc07c339ec4099a8b9b0e"
 ```
 
@@ -104,8 +208,21 @@ curl "https://api.heysummit.com/api/attendees/"
     "name": "Joe Bloggs",
     "event_id": 24,
     "event_name": "Demo Summit ABC",
-    "created_at": "2019-04-18T19:51:24.073422"
-    ...
+    "created_at": "2019-04-18T19:51:24.073422",
+    "agreed_terms": "2020-06-15T23:14:52.970120",
+    "affiliate_email": null,
+    "speaker_referrer_email": null,
+    "utm_source": null,
+    "utm_medium": null,
+    "utm_campaign": null,
+    "referer_ref": null,
+    "http_referer": null,
+    "http_referer_domain": null,
+    "ip_address": null,
+    "categories": [],
+    "talks": [],
+    "questions": [],
+    "tickets": []
 }
 ```
 
